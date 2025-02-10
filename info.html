@@ -1,0 +1,157 @@
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลเกี่ยวกับสิ่งแวดล้อม</title>
+
+    <!-- CSS เริ่มต้น -->
+    <style>
+        /* สไตล์สำหรับเมนูนำทาง */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* สไตล์แทบเมนู */
+        .navbar {
+            background-color: #4CAF50;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .navbar a:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        /* ส่วนเนื้อหาหลัก */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .info {
+            margin-bottom: 30px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            font-size: 18px;
+            color: #555;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .stats {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f4e7;
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- เมนูนำทาง -->
+    <div class="navbar">
+        <a href="home.html">Home</a>
+        <a href="info.html">Information</a>
+        <a href="sum.html">How about today?</a>
+        <a href="average.html">Average</a>
+    </div>
+
+    <!-- ส่วนเนื้อหาหลัก -->
+    <div class="container">
+        <h1>ข้อมูลเกี่ยวกับสิ่งแวดล้อม</h1>
+        
+        <section class="info">
+            <h2>สิ่งแวดล้อมคืออะไร?</h2>
+            <p>สิ่งแวดล้อมหมายถึงทุกสิ่งทุกอย่างที่อยู่รอบตัวเรา เช่น อากาศ น้ำ ดิน และสิ่งมีชีวิตต่างๆ ซึ่งสิ่งแวดล้อมมีผลต่อการดำรงชีวิตของมนุษย์และสิ่งมีชีวิตอื่นๆ บนโลกนี้</p>
+        </section>
+        
+        <section class="info">
+            <h2>ปัญหาสิ่งแวดล้อมที่สำคัญ</h2>
+            <ul>
+                <li>การเปลี่ยนแปลงสภาพภูมิอากาศ (Climate Change)</li>
+                <li>มลพิษทางอากาศ (Air Pollution)</li>
+                <li>การสูญเสียความหลากหลายทางชีวภาพ (Biodiversity Loss)</li>
+                <li>การใช้ทรัพยากรธรรมชาติอย่างไม่ยั่งยืน (Unsustainable Resource Use)</li>
+            </ul>
+        </section>
+
+        <section class="info">
+            <h2>วิธีการรักษาสิ่งแวดล้อม</h2>
+            <ul>
+                <li>ลดการใช้พลาสติกและรีไซเคิลขยะ</li>
+                <li>ใช้พลังงานสะอาด เช่น พลังงานแสงอาทิตย์และพลังงานลม</li>
+                <li>ลดการปล่อยคาร์บอนจากการเดินทางและการผลิต</li>
+                <li>สนับสนุนการปลูกต้นไม้และการอนุรักษ์ธรรมชาติ</li>
+            </ul>
+        </section>
+
+        <section class="info">
+            <h2>ข้อมูลสถิติสิ่งแวดล้อม</h2>
+            <p>ข้อมูลเชิงสถิติการปล่อยมลพิษในประเทศต่างๆ รวมถึงแนวทางที่มีประสิทธิภาพในการลดผลกระทบจากกิจกรรมมนุษย์.</p>
+            <button onclick="showStats()">แสดงสถิติสิ่งแวดล้อม</button>
+            <div id="stats" class="stats"></div>
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function showStats() {
+            const statsDiv = document.getElementById("stats");
+            statsDiv.innerHTML = `
+                <h3>สถิติการปล่อยมลพิษจากการเดินทาง:</h3>
+                <ul>
+                    <li>รถยนต์ที่ใช้เครื่องยนต์เบนซินปล่อย CO2 ประมาณ 2.3 กิโลกรัมต่อการเดินทาง 10 กิโลเมตร</li>
+                    <li>เครื่องบินปล่อย CO2 ประมาณ 90 กิโลกรัมต่อการเดินทาง 1,000 กิโลเมตร</li>
+                    <li>การใช้ไฟฟ้าที่ผลิตจากแหล่งพลังงานฟอสซิลปล่อย CO2 ประมาณ 0.5 กิโลกรัมต่อ kWh</li>
+                </ul>
+                <p>การลดการใช้พลังงานและการเลือกใช้พลังงานสะอาดสามารถช่วยลดการปล่อย CO2 ได้อย่างมีประสิทธิภาพ.</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณปริมาณคาร์บอน</title>
+    <style>
+        /* สไตล์สำหรับเมนูนำทาง */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        /* สไตล์แทบเมนู */
+        .navbar {
+            background-color: #4CAF50;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .navbar a:hover {
+            background-color: #45a049;
+            color: white;
+        }
+        /* ส่วนเนื้อหาหลัก */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .input-group label {
+            font-size: 18px;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .input-group input {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: block;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px auto;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .result {
+            text-align: center;
+            font-size: 22px;
+            margin-top: 30px;
+            color: #333;
+        }
+        .advice {
+            font-size: 18px;
+            text-align: center;
+            color: #555;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- เมนูนำทาง -->
+    <div class="navbar">
+      <a href="home.html">Home</a>
+      <a href="info.html">Information</a>
+      <a href="sum.html">How about today?</a>
+      <a href="average.html">Average</a>
+  </div>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>กรอกข้อมูลการปล่อย CO2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f7;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #4CAF50;
+      margin-top: 20px;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>กรอกข้อมูลการปล่อย CO2</h1>
+  
+  <div class="container">
+    <label for="plasticBottles">จำนวนขวดพลาสติกที่ใช้: </label>
+    <input type="number" id="plasticBottles" value="0">
+  
+    <br><br>
+  
+    <label for="travelDistance">ระยะทางการเดินทาง (km): </label>
+    <input type="number" id="travelDistance" value="0">
+
+    <label for="electric">พลังงานไฟฟ้าที่ใช้(kwh): </label>
+    <input type="number" id="electric" value="0">
+  
+  
+    <br><br>
+  
+    <button onclick="saveData()">บันทึกข้อมูล</button>
+  
+    <p id="message"></p>
+  </div>
+
+  <script>
+    function saveData() {
+      const plasticBottles = parseFloat(document.getElementById('plasticBottles').value) || 0;
+      const travelDistance = parseFloat(document.getElementById('travelDistance').value) || 0;
+      const electric = parseFloat(document.getElementById('electric').value) || 0;
+      
+      const co2FromPlastic = plasticBottles * 0.07;
+      const co2FromTravel = travelDistance * 0.02;
+      const co2electric = electric * 0.09;
+
+      const totalCO2 = co2FromPlastic + co2FromTravel + co2electric;
+
+      localStorage.setItem('totalCO2', totalCO2);
+
+      document.getElementById('message').innerText = `ข้อมูลถูกบันทึกแล้ว! คุณปล่อย CO2 รวม: ${totalCO2.toFixed(2)} กิโลกรัม`;
+    }
+  </script>
+</body>
+</html>
+
+
