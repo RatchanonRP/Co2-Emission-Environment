@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณปริมาณคาร์บอน</title>
+    <style>
+        /* สไตล์สำหรับเมนูนำทาง */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        /* สไตล์แทบเมนู */
+        .navbar {
+            background-color: #4CAF50;
+            overflow: hidden;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            position: sticky;
+        }
+        .navbar a:hover {
+            background-color: #45a049;
+            color: white;
+            position: sticky;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <!-- เมนูนำทาง -->
+    <div class="navbar">
+        <a href="home.html">Home</a>
+        <a href="info.html">Information</a>
+        <a href="shop.html">Planted Shop</a>
+        <a href="ปุ๋ย.html">Fertilizer Shop</a>
+    </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบโพสต์ขายต้นไม้และซื้อสินค้าด้วยเงิน</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: left;
+            justify-content: space-between;
+            background-color: #4CAF50;
+            padding: 0px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .container {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 900px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .tree-grid, .cart-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+        }
+
+        .tree-item, .cart-item {
+            background-color: #ffffff;
+            padding: 10px;
+            width: 45%;
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tree-item img, .cart-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .tree-item h4, .cart-item h4 {
+            margin-top: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .tree-item p, .cart-item p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .tree-item button, .cart-item button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            background-color: #e74c3c;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .tree-item button:hover, .cart-item button:hover {
+            background-color: #c0392b;
+        }
+
+        .cart-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .cart-footer {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .balance-info {
+            font-size: 16px;
+        }
+
+        .total-price {
+            font-size: 16px;
+        }
+
+        /* ปรับการแสดงผลของตะกร้าให้อยู่ด้านล่างโพสต์ */
+        .cart-container {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 900px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .cart-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .cart-item {
+            width: 45%;
+        }
+
+        /* ฟอร์มกรอกข้อมูลที่อยู่ */
+        .address-form {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .address-form h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .address-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .address-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .confirmation-message {
+            font-size: 18px;
+            color: #45a049;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="balance-info" id="balanceInfo">ยอดเงิน: ฿0.00</div>
+        <button onclick="openDeposit()">เติมเงิน</button>
+    </div>
+
+    <!-- โพสต์ขายต้นไม้ -->
+    <div class="container">
+        
+        <h2>โพสต์ขายต้นไม้</h2>
+        <form id="treeForm">
+            <div class="form-group">
+                <label for="treeName">ชื่อของต้นไม้</label>
+                <input type="text" id="treeName" placeholder="ชื่อของต้นไม้" required />
+            </div>
+            <div class="form-group">
+                <label for="treePrice">ราคาต้นไม้ (฿)</label>
+                <input type="number" id="treePrice" placeholder="ราคา" required />
+            </div>
+            <div class="form-group">
+                <label for="treeType">พันธุ์ต้นไม้และรายละเอียด</label>
+                <input type="text" id="treeType" placeholder="พันธุ์ต้นไม้และรายละเอียด" required />
+            </div>
+            <div class="form-group">
+                <label for="treeImage">อัพโหลดรูปต้นไม้</label>
+                <input type="file" id="treeImage" />
+            </div>
+            <button type="submit">โพสต์ขายต้นไม้</button>
+        </form>
+
+        <h3>ต้นไม้ที่โพสต์ขาย</h3>
+        <div class="tree-grid" id="postedTrees"></div>
+    </div>
+
+    <!-- ตะกร้าของคุณ -->
+    <div class="cart-container">
+        <h3 class="cart-header">ตะกร้าของคุณ</h3>
+        <div class="cart-grid" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="total-price" id="totalPrice">รวม: ฿0.00</div>
+            <button onclick="checkout()">ชำระเงิน</button>
+        </div>
+    </div>
+
+    <!-- ฟอร์มกรอกที่อยู่ -->
+    <div class="address-form" id="addressForm" style="display:none;">
+        <h3>กรอกข้อมูลที่อยู่จัดส่ง</h3>
+        <input type="text" id="address" placeholder="ที่อยู่จัดส่ง" required />
+        <input type="text" id="phone" placeholder="เบอร์โทรศัพท์" required />
+        <button onclick="confirmPayment()">ตกลง</button>
+    </div>
+
+    <!-- ข้อความยืนยัน -->
+    <div class="confirmation-message" id="confirmationMessage" style="display:none;">
+        <p>การชำระเงินสำเร็จ! ขอบคุณที่ใช้บริการ.</p>
+        <p><img src="https://img.icons8.com/ios/50/000000/checkmark.png" alt="Confirmed" /></p>
+    </div>
+
+    <script>
+        let balance = parseFloat(localStorage.getItem("balance") || "0");
+        document.getElementById("balanceInfo").innerText = `ยอดเงิน: ฿${balance.toFixed(2)}`;
+
+        // เติมเงิน
+        function openDeposit() {
+            let depositAmount = prompt("กรุณากรอกจำนวนเงินที่ต้องการเติม:");
+            depositAmount = parseFloat(depositAmount);
+            if (isNaN(depositAmount) || depositAmount <= 0) {
+                alert("กรุณากรอกจำนวนเงินที่ถูกต้อง!");
+                return;
+            }
+            balance += depositAmount;
+            localStorage.setItem("balance", balance);
+            document.getElementById("balanceInfo").innerText = `ยอดเงิน: ฿${balance.toFixed(2)}`;
+        }
+
+        // ฟังก์ชันโพสต์ต้นไม้
+        document.getElementById("treeForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const treeName = document.getElementById("treeName").value;
+            const treePrice = parseFloat(document.getElementById("treePrice").value);
+            const treeType = document.getElementById("treeType").value;
+            const treeImage = document.getElementById("treeImage").files[0];
+
+            if (treePrice <= 0) {
+                alert("กรุณากรอกราคาให้ถูกต้อง!");
+                return;
+            }
+
+            let tree = {
+                name: treeName,
+                price: treePrice,
+                tree: treeType,
+                image: treeImage ? URL.createObjectURL(treeImage) : null
+            };
+
+            let trees = JSON.parse(localStorage.getItem("trees") || "[]");
+            trees.push(tree);
+            localStorage.setItem("trees", JSON.stringify(trees));
+
+            displayPostedTrees();
+            document.getElementById("treeForm").reset();
+        });
+
+        // ฟังก์ชันแสดงโพสต์ต้นไม้
+        function displayPostedTrees() {
+            let trees = JSON.parse(localStorage.getItem("trees") || "[]");
+            let postedTreesDiv = document.getElementById("postedTrees");
+            postedTreesDiv.innerHTML = "";
+
+            if (trees.length === 0) {
+                postedTreesDiv.innerHTML = "<p>ยังไม่มีข้อมูลต้นไม้ที่โพสต์ขาย</p>";
+            } else {
+                trees.forEach((tree, index) => {
+                    let treeElement = document.createElement("div");
+                    treeElement.classList.add("tree-item");
+
+                    let treeHTML = `
+                        <h4>${tree.name}</h4>
+                        <p>ราคา: ฿${tree.price}</p>
+                        <p>พันธุ์: ${tree.tree}</p>
+                        ${tree.image ? `<img src="${tree.image}" alt="${tree.name}" />` : ""}
+                        <button onclick="addToCart(${index})">เพิ่มไปยังตะกร้า</button>
+                    `;
+
+                    treeElement.innerHTML = treeHTML;
+                    postedTreesDiv.appendChild(treeElement);
+                });
+            }
+        }
+
+        // ฟังก์ชันเพิ่มสินค้าเข้าตะกร้า
+        function addToCart(index) {
+            let trees = JSON.parse(localStorage.getItem("trees") || "[]");
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+            let tree = trees[index];
+            cart.push(tree);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            displayCart();
+        }
+
+        // ฟังก์ชันแสดงตะกร้า
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            let cartItemsDiv = document.getElementById("cartItems");
+            cartItemsDiv.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = "<p>ตะกร้าของคุณว่างเปล่า</p>";
+            } else {
+                cart.forEach((item, index) => {
+                    let cartItemElement = document.createElement("div");
+                    cartItemElement.classList.add("cart-item");
+
+                    let cartItemHTML = `
+                        <h4>${item.name}</h4>
+                        <p>ราคา: ฿${item.price}</p>
+                        <button onclick="removeFromCart(${index})">ลบ</button>
+                    `;
+
+                    cartItemElement.innerHTML = cartItemHTML;
+                    cartItemsDiv.appendChild(cartItemElement);
+                });
+            }
+
+            let totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById("totalPrice").innerText = `รวม: ฿${totalPrice.toFixed(2)}`;
+        }
+
+        // ฟังก์ชันลบสินค้าในตะกร้า
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            displayCart();
+        }
+
+        // ฟังก์ชันชำระเงิน
+        // ฟังก์ชันชำระเงิน
+function checkout() {
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    let totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+
+    if (totalPrice > balance) {
+        alert("ยอดเงินไม่เพียงพอ!");
+        return;
+    }
+
+    balance -= totalPrice;
+    localStorage.setItem("balance", balance);
+
+    // ลบสินค้าในตะกร้าออกจาก localStorage หลังจากชำระเงิน
+    localStorage.removeItem("cart");
+
+    // ไปที่หน้ากรอกข้อมูลที่อยู่
+    document.querySelector(".container").style.display = "none";
+    document.querySelector(".cart-container").style.display = "none";
+    document.getElementById("addressForm").style.display = "block";
+}
+
+
+        // ฟังก์ชันยืนยันการชำระเงิน
+        // ฟังก์ชันยืนยันการชำระเงิน
+function confirmPayment() {
+    let address = document.getElementById("address").value;
+    let phone = document.getElementById("phone").value;
+
+    if (!address || !phone) {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน!");
+        return;
+    }
+
+    // ลบรายการสินค้าที่โพสต์ขายออกจาก localStorage หลังจากชำระเงิน
+    localStorage.removeItem("trees");
+
+    // แสดงข้อความยืนยันการชำระเงิน
+    document.getElementById("addressForm").style.display = "none";
+    document.getElementById("confirmationMessage").style.display = "block";
+}
+
+        // เรียกแสดงข้อมูลโพสต์เมื่อโหลดหน้าเว็บ
+        window.onload = function() {
+            displayPostedTrees();
+            displayCart();
+        };
+    </script>
+</body>
+</html>

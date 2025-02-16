@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณปริมาณคาร์บอน</title>
+    <style>
+        /* สไตล์สำหรับเมนูนำทาง */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        /* สไตล์แทบเมนู */
+        .navbar {
+            background-color: #4CAF50;
+            overflow: hidden;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            position: sticky;
+        }
+        .navbar a:hover {
+            background-color: #45a049;
+            color: white;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <!-- เมนูนำทาง -->
+    <div class="navbar">
+        <a href="home.html">Home</a>
+        <a href="info.html">Information</a>
+        <a href="shop.html">Planted Shop</a>
+        <a href="ปุ๋ย.html">Fertilizer Shop</a>
+    </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบขายปุ๋ย</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: left;
+            justify-content: space-between;
+            background-color: #4CAF50;
+            padding: 0px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .container {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 900px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .tree-grid, .cart-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+        }
+
+        .tree-item, .cart-item {
+            background-color: #ffffff;
+            padding: 10px;
+            width: 45%;
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tree-item img, .cart-item img {
+            width: 50%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            padding: 10px;
+            margin: center;
+        }
+
+        .tree-item h4, .cart-item h4 {
+            margin-top: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .tree-item p, .cart-item p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .tree-item button, .cart-item button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            background-color: #e74c3c;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .tree-item button:hover, .cart-item button:hover {
+            background-color: #c0392b;
+        }
+
+        .cart-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .cart-footer {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .balance-info {
+            font-size: 16px;
+        }
+
+        .total-price {
+            font-size: 16px;
+        }
+
+        /* ปรับการแสดงผลของตะกร้าให้อยู่ด้านล่างโพสต์ */
+        .cart-container {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 900px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .cart-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .cart-item {
+            width: 45%;
+        }
+
+        /* ฟอร์มกรอกข้อมูลที่อยู่ */
+        .address-form {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 900px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .address-form h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .address-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .address-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .confirmation-message {
+            font-size: 18px;
+            color: #45a049;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="balance-info" id="balanceInfo">ยอดเงิน: ฿0.00</div>
+        <button onclick="openDeposit()">เติมเงิน</button>
+    </div>
+
+    <!-- รายการปุ๋ยที่มีขาย -->
+    <div class="container">
+        <h2>ปุ๋ยที่มีขาย</h2>
+        <div class="tree-grid" id="fertilizers">
+            <!-- ปุ๋ยตัวอย่าง -->
+            <div class="tree-item">
+                <img src="https://via.placeholder.com/150" alt="ปุ๋ย1" />
+                <h4>ปุ๋ย NPK 15-15-15</h4>
+                <p>ราคา: ฿200</p>
+                <p>ปุ๋ยเคมีผสม NPK 15-15-15 ใช้สำหรับพืชทุกชนิด</p>
+                <button onclick="addToCart(0)">เพิ่มไปยังตะกร้า</button>
+            </div>
+            <div class="tree-item">
+                <img src="https://via.placeholder.com/150" alt="ปุ๋ย2" />
+                <h4>ปุ๋ยอินทรีย์</h4>
+                <p>ราคา: ฿150</p>
+                <p>ปุ๋ยอินทรีย์ธรรมชาติ เหมาะสำหรับการเกษตรปลอดสาร</p>
+                <button onclick="addToCart(1)">เพิ่มไปยังตะกร้า</button>
+            </div>
+            <!-- เพิ่มปุ๋ยตัวอย่างอื่นๆ ตามต้องการ -->
+        </div>
+    </div>
+
+    <!-- ตะกร้าของคุณ -->
+    <div class="cart-container">
+        <h3 class="cart-header">ตะกร้าของคุณ</h3>
+        <div class="cart-grid" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="total-price" id="totalPrice">รวม: ฿0.00</div>
+            <button onclick="checkout()">ชำระเงิน</button>
+        </div>
+    </div>
+
+    <!-- ฟอร์มกรอกที่อยู่ -->
+    <div class="address-form" id="addressForm" style="display:none;">
+        <h3>กรอกข้อมูลที่อยู่จัดส่ง</h3>
+        <input type="text" id="address" placeholder="ที่อยู่จัดส่ง" required />
+        <input type="text" id="phone" placeholder="เบอร์โทรศัพท์" required />
+        <button onclick="confirmPayment()">ตกลง</button>
+    </div>
+
+    <!-- ข้อความยืนยัน -->
+    <div class="confirmation-message" id="confirmationMessage" style="display:none;">
+        <p>การชำระเงินสำเร็จ! ขอบคุณที่ใช้บริการ.</p>
+        <p><img src="https://img.icons8.com/ios/50/000000/checkmark.png" alt="Confirmed" /></p>
+    </div>
+
+    <script>
+        let balance = parseFloat(localStorage.getItem("balance") || "0");
+        document.getElementById("balanceInfo").innerText = `ยอดเงิน: ฿${balance.toFixed(2)}`;
+
+        // เติมเงิน
+        function openDeposit() {
+            let depositAmount = prompt("กรุณากรอกจำนวนเงินที่ต้องการเติม:");
+            depositAmount = parseFloat(depositAmount);
+            if (isNaN(depositAmount) || depositAmount <= 0) {
+                alert("กรุณากรอกจำนวนเงินที่ถูกต้อง!");
+                return;
+            }
+            balance += depositAmount;
+            localStorage.setItem("balance", balance);
+            document.getElementById("balanceInfo").innerText = `ยอดเงิน: ฿${balance.toFixed(2)}`;
+        }
+
+        // ปุ๋ยที่มีขายในระบบ
+        const fertilizers = [
+            { name: "อะมิโน ฮิวมิก (ชนิดผง) ตราสิงโตมงกุฏเพชร 50 กก.", price: 350, img: "https://image.makewebcdn.com/makeweb/m_1920x0/R52XyqDjp/DefaultData/%E0%B8%AD%E0%B8%B0%E0%B8%A1%E0%B8%B4%E0%B9%82%E0%B8%99%E0%B8%AE%E0%B8%B4%E0%B8%A7%E0%B8%A1%E0%B8%B4%E0%B8%84_%E0%B8%95%E0%B8%A3%E0%B8%B2%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B9%82%E0%B8%95%E0%B8%A1%E0%B8%87%E0%B8%81%E0%B8%B8%E0%B8%8F%E0%B9%80%E0%B8%9E%E0%B8%8A%E0%B8%A3.png?v=202405291424", usage: "ช่วยปรับปรุงโครงสร้างของดิน ปรับค่า pH ของดินให้เหมาะสมในการเจริญเติบโตของพืช" },
+            { name: "ฮิวมิแคลพลัส (ชนิดเม็ด) ตราดินเย็น 50 กก.", price: 590, img: "https://image.makewebcdn.com/makeweb/m_1920x0/R52XyqDjp/DefaultData/%E0%B8%AE%E0%B8%B4%E0%B8%A7%E0%B8%A1%E0%B8%B4%E0%B9%81%E0%B8%84%E0%B8%A5%E0%B8%9E%E0%B8%A5%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B4%E0%B8%99%E0%B9%80%E0%B8%A2%E0%B9%87%E0%B8%99_50_%E0%B8%81%E0%B8%B4%E0%B9%82%E0%B8%A5%E0%B8%81%E0%B8%A3%E0%B8%B1%E0%B8%A1_.png?v=202405291424", usage: "สารปรับปรุงดิน อินทรีย์เกรดพิเศษ ธาตุอาหารธรรมชาติ ชนิดปั้นเม็ด เหมาะสำหรับพืชไร่ สวน" },
+            { name: "ปุ๋ยอินทรีย์โกรแม็กซ์ (ชนิดเม็ด) ตราแมวตาเพชร 50 กก.", price: 560, img: "https://image.makewebcdn.com/makeweb/m_1920x0/R52XyqDjp/DefaultData/%E0%B8%9B%E0%B8%B8%E0%B9%8B%E0%B8%A2%E0%B8%AD%E0%B8%B4%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B9%8C7.png?v=202405291424", usage: "ปุ๋ยอินทรีย์เป็นแหล่งแร่ธาตุอาหารที่จะปลดปล่อยธาตุอาหาร ออกมาให้แก่ต้นพืชอย่างช้าๆ" },
+            { name: "pH PLUS ปูนขาวผสม (ชนิดผง) ตราพยัคฆ์เพชร 25 กก.", price: 180, img: "https://image.makewebcdn.com/makeweb/m_1920x0/R52XyqDjp/DefaultData/_pH_PLUS_%E0%B8%9C%E0%B8%87_25_%E0%B8%81%E0%B8%81_1.png?v=202405291424", usage: "ปูนขาว ผสมแร่ธาตุ ปรับดินเค็ม ป้องกันรากเน่าจากน้ำท่วม-ขัง มีสารป้องกันเชื้อรา ที่เกิดจากความชื้น แก้ดินกรด ไช้ได้ทุกสภาพดินที่เสีย" },
+            { name: "ไบโอฮิวมิกแม็กซ์ (ชนิดผง) ตราพยัคฆ์เพชร 50 กก.", price: 395, img: "https://image.makewebcdn.com/makeweb/m_1920x0/R52XyqDjp/DefaultData/6_3.png?v=202405291424", usage: "สูตรเข้มข้น พรีเมี่ยม ช่วยปรับปรุงโครงสร้างของดิน เพิ่มสารอาหารในดินให้เหมาะสมในการเจริญเติบโตของพืช" },
+            { name: "(เซ็ต 10 ถุง) ออร์กรีน ดินปลูกสำเร็จ สูตรผสมกากกาแฟหมัก", price: 350, img: "https://image.makewebcdn.com/makeweb/m_1920x0/R52XyqDjp/DefaultData/orgreen.jpg?v=202405291424", usage: "ดินปลูกสำเร็จ สารอาหารครบถ้วน" },
+        ];
+
+        // ฟังก์ชันแสดงรายการปุ๋ย
+        function displayFertilizers() {
+    let fertilizersDiv = document.getElementById("fertilizers");
+    fertilizersDiv.innerHTML = "";
+
+    fertilizers.forEach((fertilizer, index) => {
+        let fertilizerElement = document.createElement("div");
+        fertilizerElement.classList.add("tree-item");
+
+        let fertilizerHTML = `
+            <img src="${fertilizer.img}" alt="${fertilizer.name}" />
+            <h4>${fertilizer.name}</h4>
+            <p>ราคา: ฿${fertilizer.price}</p>
+            <p>${fertilizer.usage}</p>
+            <button onclick="addToCart(${index})">เพิ่มไปยังตะกร้า</button>
+        `;
+        fertilizerElement.innerHTML = fertilizerHTML;
+        fertilizersDiv.appendChild(fertilizerElement);
+    });
+}
+
+
+        // ฟังก์ชันเพิ่มปุ๋ยลงในตะกร้า
+        function addToCart(index) {
+            let fertilizer = fertilizers[index];
+
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            cart.push(fertilizer);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            displayCart();
+        }
+
+        // ฟังก์ชันแสดงตะกร้า
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            let cartItemsDiv = document.getElementById("cartItems");
+            cartItemsDiv.innerHTML = "";
+
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = "<p>ตะกร้าของคุณว่าง</p>";
+            } else {
+                cart.forEach((item, index) => {
+                    totalPrice += item.price;
+
+                    let cartItem = document.createElement("div");
+                    cartItem.classList.add("cart-item");
+
+                    let cartItemHTML = `
+                        <h4>${item.name}</h4>
+                        <p>ราคา: ฿${item.price}</p>
+                        <button onclick="removeFromCart(${index})">ลบออกจากตะกร้า</button>
+                    `;
+                    cartItem.innerHTML = cartItemHTML;
+                    cartItemsDiv.appendChild(cartItem);
+                });
+            }
+
+            document.getElementById("totalPrice").innerText = `รวม: ฿${totalPrice.toFixed(2)}`;
+        }
+
+        // ฟังก์ชันลบปุ๋ยออกจากตะกร้า
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            displayCart();
+        }
+
+        // ฟังก์ชันชำระเงิน
+        function checkout() {
+            let totalPrice = 0;
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+            cart.forEach(item => {
+                totalPrice += item.price;
+            });
+
+            if (balance >= totalPrice) {
+                balance -= totalPrice;
+                localStorage.setItem("balance", balance);
+
+                localStorage.removeItem("cart");
+                displayCart();
+                document.getElementById("balanceInfo").innerText = `ยอดเงิน: ฿${balance.toFixed(2)}`;
+
+                document.getElementById("addressForm").style.display = "block";
+            } else {
+                alert("ยอดเงินของคุณไม่เพียงพอสำหรับการชำระเงิน");
+            }
+        }
+
+        // ฟังก์ชันยืนยันการชำระเงิน
+        function confirmPayment() {
+            let address = document.getElementById("address").value;
+            let phone = document.getElementById("phone").value;
+
+            if (!address || !phone) {
+                alert("กรุณากรอกข้อมูลที่อยู่และเบอร์โทรศัพท์");
+                return;
+            }
+
+            document.getElementById("addressForm").style.display = "none";
+            document.getElementById("confirmationMessage").style.display = "block";
+        }
+
+        // เรียกใช้งานการแสดงข้อมูลปุ๋ยที่โพสต์เมื่อหน้าโหลด
+        window.onload = function() {
+            displayFertilizers();
+            displayCart();
+        };
+    </script>
+
+</body>
+</html>
